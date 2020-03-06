@@ -123,6 +123,8 @@ public class School {
     public boolean addInstructor(String iId, String iName, String iEmail, String iPhone){
 //        System.out.println("Adding instructor...");
         Instructor a = new Instructor(Integer.parseInt(iId), iName, iEmail, iPhone);
+//        this.instructors.add(a);
+//        System.out.println(this.instructors);
 
         return true;
     }
