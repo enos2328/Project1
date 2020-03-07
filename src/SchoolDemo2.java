@@ -2,17 +2,16 @@ public class SchoolDemo2
 {
   public static void main(String[] args)
   {
-    System.out.println("SchoolDemo2.java commented out.");
-//    School SCD = new School("SCD");
-//    Course course1;
+    School SCD = new School("SCD");
+    Course course1;
 //
-//    System.out.println("===== Read Data =====");
-//    SCD.readData("C:\\tmp\\test1.txt");
+    System.out.println("===== Read Data =====");
+    SCD.readData(".\\test1.txt");
 //
-//    SCD.addInstructor(700, "E. Tao", "tao@csumb.edu", "777-777-1234");
-//    SCD.addCourse(300, "CST300 – ProSem", 70, "BIT 110");
-//    SCD.addCourse(499, "CST499 – iOS Dev", 15, "BIT 104");
-//
+    SCD.addInstructor(700, "E. Tao", "tao@csumb.edu", "777-777-1234");
+    SCD.addCourse(300, "CST300 – ProSem", 70, "BIT 110");
+    SCD.addCourse(499, "CST499 – iOS Dev", 15, "BIT 104");
+////
 //    SCD.assignInstructor (205, 200);
 //    SCD.assignInstructor (306, 100);
 //    SCD.register (306, 7777);

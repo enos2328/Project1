@@ -19,4 +19,14 @@ public class Instructor {
         this.myInstructorEmail = iEmail;
         this.myInstructorPhone = iPhone;
     }
+
+    public void display() { System.out.println(myInstructorName); }
+
+    public int getMyInstructorID(){ return myInstructorID; }
+
+    public Object getMyInstructorEmail() { return myInstructorEmail; }
+
+    public String getMyInstructorName() { return myInstructorName; }
+
+    public String getMyInstructorPhone() { return myInstructorPhone; }
 }

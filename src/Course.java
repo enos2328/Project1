@@ -9,14 +9,18 @@
 public class Course {
     private int myCourseID;
     private String myCourseName;
-    private String myCourseEnrolled;
+    private int myCourseEnrolled;
     private String myCourseLocation;
 
 
-    public Course(int cId, String cName, String cEnrolled, String cLocation) {
+    public Course(int cId, String cName, int cEnrolled, String cLocation) {
         this.myCourseID = cId;
         this.myCourseName = cName;
         this.myCourseEnrolled = cEnrolled;
         this.myCourseLocation = cLocation;
     }
+
+    public void display() { System.out.println(myCourseID + " - " + myCourseName);}
+
+    public int getMyCourseID() { return myCourseID; }
 }

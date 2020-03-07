@@ -15,12 +15,12 @@ public class SchoolDemo1
 
     System.out.println("\n===== School Info 2 =====");
     SCD.schoolInfo();
-//
-//    System.out.println("\n===== Search by email =====");
-//    SCD.searchByEmail("ybyun@csumb.edu");
-//
-//    System.out.println("\n===== Search by email (fail) =====");
-//    SCD.searchByEmail("byun@csumb.edu");
+
+    System.out.println("\n===== Search by email =====");
+    SCD.searchByEmail("ybyun@csumb.edu");
+
+    System.out.println("\n===== Search by email (fail) =====");
+    SCD.searchByEmail("byun@csumb.edu");
 
     System.out.println("\n===== End of SchoolDemo1 =====");
   }

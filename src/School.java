@@ -20,16 +20,17 @@ import java.nio.file.Paths;
 
 public class School {
     private String mySchoolName;
-    private ArrayList<Instructor> instructors;
-    private ArrayList<Course> courses;
-    private ArrayList<Student> students;
+    private ArrayList<Instructor> instructors = new ArrayList<>();
+    private int iIndex = 0;
+    private ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<>();
 
     public School(String schoolName){
         this.mySchoolName = schoolName;
     }
 
 
-    // READ DATA METHOD
+    // ####### READ DATA METHOD
     public void readData(String filename) {
         File f = new File(filename);//creates file
         Scanner scan = null;//we do this so that the Scanner is created here, it's set to null so that nothing is in it
@@ -42,158 +43,184 @@ public class School {
         }
 
 
-        // READ IN INSTRUCTORS
+        // ####### READ IN INSTRUCTORS
         String iSize = scan.nextLine();
-//        System.out.println("Size: " + iSize);
-        System.out.println(iSize);
-        HashMap<String, String> iArray = new HashMap<>();
-
         for(int i = 0; i < Integer.parseInt(iSize); i++){
             String sc = scan.nextLine();
-            System.out.println(sc);
             String[] tester = sc.split(",");
-
-            int iLength = tester.length;
-//            System.out.println(iLength);
-
-            iArray.put("iId", tester[0]);
-            iArray.put("iName", tester[1]);
-            iArray.put("iEmail", tester[2]);
-            iArray.put("iPhone", tester[3]);
-
-//            System.out.println("In the HashMap: " + iArray);
-            addInstructor(iArray.get("iId"), iArray.get("iName"), iArray.get("iEmail"), iArray.get("iPhone"));
-
+            Instructor dr = new Instructor(Integer.parseInt(tester[0]), tester[1], tester[2], tester[3]);
+            addInstructor(dr);
         }
 
-        // READ IN COURSES
+        // ####### READ IN COURSES
         String cSize = scan.nextLine();
-//        System.out.println("Size: " + cSize);
-        System.out.println(cSize);
-        HashMap<String, String> cArray = new HashMap<>();
-
         for(int i = 0; i < Integer.parseInt(cSize); i++){
             String sc = scan.nextLine();
-            System.out.println(sc);
             String[] tester = sc.split(",");
-
-            int cLength = tester.length;
-//            System.out.println(cLength);
-
-            cArray.put("cId", tester[0]);
-            cArray.put("cName", tester[1]);
-            cArray.put("cEnrolled", tester[2]);
-            cArray.put("cLocation", tester[3]);
-
-//            System.out.println("In the HashMap: " + cArray);
-            addCourse(cArray.get("cId"), cArray.get("cName"), cArray.get("cEnrolled"), cArray.get("cLocation"));
-
+            Course cou = new Course(Integer.parseInt(tester[0]), tester[1], Integer.parseInt(tester[2]), tester[3]);
+            addCourse(cou);
         }
 
-        // READ IN STUDENTS
+        // ####### READ IN STUDENTS
         String sSize = scan.nextLine();
-//        System.out.println("Size: " + sSize);
-        System.out.println(sSize);
-        HashMap<String, String> sArray = new HashMap<>();
-
         for(int i = 0; i < Integer.parseInt(sSize); i++){
             String sc = scan.nextLine();
-            System.out.println(sc);
             String[] tester = sc.split(",");
-
-            int sLength = tester.length;
-//            System.out.println(sLength);
-
-            sArray.put("sId", tester[0]);
-            sArray.put("sName", tester[1]);
-
-//            System.out.println("In the HashMap: " + sArray);
-            addStudent(sArray.get("sId"), sArray.get("sName"));
-
+            Student stu = new Student(Integer.parseInt(tester[0]), tester[1]);
+            addStudent(stu);
         }
-
-
-
         // if succeeded
-        System.out.println();
         System.out.println("Done.");
     }
 
-    // ADD INSTRUCTOR METHOD
-    public boolean addInstructor(String iId, String iName, String iEmail, String iPhone){
-//        System.out.println("Adding instructor...");
-        Instructor a = new Instructor(Integer.parseInt(iId), iName, iEmail, iPhone);
-//        this.instructors.add(a);
-//        System.out.println(this.instructors);
+    // ####### ADD INSTRUCTOR METHOD
+    public void addInstructor(Instructor a){
+        //check if instructor being added already exists
+        boolean foundI = false;
+        try {
+            for (Instructor ins : instructors) {
+                if (a.getMyInstructorID() == ins.getMyInstructorID()) {
+                    foundI = true;
+                    break;
+                }
+            }
 
-        return true;
+            if(!foundI){
+                instructors.add(a);
+            } else {
+                System.out.println("Instructor info reading failed - Employee number " + a.getMyInstructorID() + " already used.");
+            }
+        } catch (NullPointerException e){
+            System.out.println("You're trying to add a memory address.");
+        }
     }
 
-    // ADD COURSE METHOD
-    public boolean addCourse(String cId, String cName, String cEnrolled, String cLocation){
-//        System.out.println("Adding course...");
-        Course a = new Course(Integer.parseInt(cId), cName, cEnrolled, cLocation);
+    // ####### ADD COURSE METHOD
+    public void addCourse(Course a){
+        //check if instructor being added already exists
+        boolean foundC = false;
+        try {
+            for (Course cou : courses) {
+                if (a.getMyCourseID() == cou.getMyCourseID()) {
+                    foundC = true;
+                    break;
+                }
+            }
 
-        return true;
+            if(!foundC){
+                courses.add(a);
+            } else {
+                System.out.println("Course info reading failed - Course number " + a.getMyCourseID() + " already used.");
+            }
+        } catch (NullPointerException e){
+            System.out.println("You're trying to add a memory address.");
+        }
     }
 
-    // ADD STUDENT METHOD
-    private boolean addStudent(String sId, String sName) {
-//        System.out.println("Adding student...");
-        Student a = new Student(Integer.parseInt(sId), sName);
+    // ####### ADD STUDENT METHOD
+    private void addStudent(Student a) {
+        //check if instructor being added already exists
+        boolean foundS = false;
+        try {
+            for (Student student : students) {
+                if (a.getMyStudentID() == student.getMyStudentID()) {
+                    foundS = true;
+                    break;
+                }
+            }
 
-        return true;
+            if(!foundS){
+                students.add(a);
+            } else {
+                System.out.println("Course info reading failed - Course number " + a.getMyStudentID() + " already used.");
+            }
+        } catch (NullPointerException e){
+            System.out.println("You're trying to add a memory address.");
+        }
     }
 
+    // ####### SCHOOL INFO METHOD
     public void schoolInfo(){
         System.out.println("School Name: " + this.mySchoolName +
-                "Instructor Information\n" +
-                getInstructors() +
-                "Course Information\n" +
-                getCourses() +
-                "Student Information\n" +
-                getStudents());
+                "\nInstructor Information");
+        getInstructors();
+        System.out.println("\nCourse Information");
+        getCourses();
+        System.out.println("\nStudent Information");
+        getStudents();
+    }
+
+    // ####### GET STUDENTS METHOD
+    private void getStudents() {
+        for(int i = 0; i < students.size(); i++){
+            students.get(i).display();
+        }
+    }
+
+    // ####### GET COURSES METHOD
+    private void getCourses() {
+        for(int i = 0; i < courses.size(); i++){
+            courses.get(i).display();
+        }
+    }
+
+    // ####### GET INSTRUCTORS METHOD
+    private void getInstructors() {
+        for(int i = 0; i < instructors.size(); i++){
+            instructors.get(i).display();
+        }
     }
 
 
-    private String getStudents() {
-        String[] students = {"test-students\n"};
+    // ####### SEARCH BY MAIL METHOD
+    public void searchByEmail(String email){
+        boolean found = false;
+        int id = 0;
+        String name = "";
+        String phone = "";
 
+        for (Instructor ins : instructors) {
+            if (ins.getMyInstructorEmail().equals(email)) {
+                found = true;
+                id = ins.getMyInstructorID();
+                name = ins.getMyInstructorName();
+                phone = ins.getMyInstructorPhone();
+                break;
+            }
+        }
 
-        return students[0];
+        if(found){
+            System.out.println("Search key: " + email +
+                    "\nEmployee Number: " + id +
+                    "\nName: " + name +
+                    "\nPhone: " + phone);
+        } else {
+            System.out.println("Search key: " + email +
+                    "\nNo employee with email " + email);
+        }
     }
 
-    private String getCourses() {
-        String[] courses = {"test-courses\n"};
-
-
-        return courses[0];
+    public void addInstructor(int id, String name, String email, String phone) {
     }
 
-    private String getInstructors() {
-        String[] instructors = {"test-instructors\n"};
+    public void addCourse(int id, String name, int enrolled, String location) {
+        //check if instructor being added already exists
+        boolean foundC = false;
+        try {
+            for (Course cou : courses) {
+                if (id == cou.getMyCourseID()) {
+                    foundC = true;
+                    break;
+                }
+            }
 
-
-        return instructors[0];
+            if(!foundC){
+                Course create = new Course(id, name, enrolled, location);
+            } else {
+                System.out.println("Course info reading failed - Course number " + id + " already used.");
+            }
+        } catch (NullPointerException e){
+            System.out.println("You're trying to add a memory address.");
+        }
     }
-
-
-
-    public boolean searchByEmail(String email){
-
-        return false;
-    }
-
-
-
-//    @Override
-//    public String toString(){
-//        return "School Name:        " + this.mySchoolName + "\n" +
-//                "Instructor Information\n" +
-//                getInstructors() +
-//                "Course Information\n" +
-//                getCourses() +
-//                "Student Information\n" +
-//                getStudents();
-//    }
 }
